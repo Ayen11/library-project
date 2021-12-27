@@ -1,0 +1,27 @@
+
+
+body {
+    display: grid;
+    grid-template-columns: (200px 1fr 200px);
+    grid-template-rows: 20px 1fr;
+}
+
+#container {
+    background-color: #f3f3f3;
+    width: 900px;
+    height: 900px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    grid-template-rows: repeat(5, minmax(0,1fr));
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: auto;
+}
+
+#card {
+    display: flex;
+    text-align: center;
+    background-color: aquamarine;
+    color: blue;
+}
