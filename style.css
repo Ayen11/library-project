@@ -31,13 +31,14 @@ body {
     font-size: xx-large;
 }
 
-.absolute {
+#absolute {
     position: absolute;
     top: 123px;
     left: 30%;
     width: 800px;
     height: 500px;
     background-color: rgb(80, 80, 80);
+    
 }
 
 .hidden {
@@ -45,4 +46,9 @@ body {
 }
 .visible {
     visibility: visible;
+}
+
+.delete {
+    background-color: burlywood;
+    color: crimson;
 }

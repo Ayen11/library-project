@@ -3,8 +3,8 @@
 let myLibrary = [];
 let titleT = document.querySelector('#titleInput');
 let authorT = document.querySelector('#authorInput');
-let pagesT = 0;
-let readT = false;
+let pagesT = document.querySelector('#pagesInput');
+let readT = document.querySelector('#readInput');
 
 
 
@@ -12,16 +12,28 @@ let readT = false;
 const containerRef = document.querySelector("#container");
 
 
+let notificationBoxRef = document.querySelector("#absolute");
+notificationBoxRef.classList.add('hidden')
+
+
 
 const addNewBookBtn = document.querySelector('#addBook'); //button to add books to page
 addNewBookBtn.addEventListener('click', () => {
-    
+    notificationBoxRef.classList.add('hidden');
+    //myLibrary = [];
+    bookT = new book(titleT.value, authorT.value, pagesT.value, readT.checked);
+    addBookToLibrary(bookT);
     displayBooks();
-    console.log(titleT.value);
+    //console.table(bookT);
 });
 
 
 
+
+const addBoxRef = document.querySelector('#addBookPage'); //button to add box to page
+addBoxRef.addEventListener('click', () => {
+    notificationBoxRef.classList.remove('hidden');
+});
 
 
 
@@ -31,6 +43,7 @@ function book(title, author, pages, read) {
     this.title = title
     this.author = author
     this.pages = pages
+    this.index = 0
     this.read = (function() {
         if (read == true) {
             return read = "Read"
@@ -52,13 +65,16 @@ const Hobbit2 = new book('The Hobbit2- Tokyo Drift', `J.R.R. Tolkien-2 (He's a r
 //simple function to push book object into array. call this before display
 function addBookToLibrary(bookI) {
     myLibrary.push(bookI);
+    bookI.index = myLibrary.length;
+    //console.table(myLibrary);
+    //alert(myLibrary);
 };
 
 
 //adds the cards to the library and from it to the page with class 
 function displayBooks () {
     
-    
+    containerRef.innerHTML = '';
     let gridsize = myLibrary.length;
     containerRef.style.gridTemplateRows = `repeat(${gridsize}, 100px)`; //change size of row here
 
@@ -69,7 +85,16 @@ function displayBooks () {
         card.classList.add('card');
         card.textContent = myLibrary[i].info();
         containerRef.appendChild(card);
-        console.log(card.classList);
+        //console.log(card.classList);
+
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = "delete"
+        deleteBtn.classList.add('delete')
+        card.appendChild(deleteBtn)
+        deleteBtn.addEventListener('click', () => {
+            containerRef.removeChild('card');
+        });
     };
 };
 
