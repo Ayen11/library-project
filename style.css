@@ -4,6 +4,7 @@ body {
     display: grid;
     grid-template-columns: (200px 1fr 200px);
     grid-template-rows: 20px 1fr;
+    font: 1rem 'Fira Sans', sans-serif;
 }
 
 #container {
@@ -28,4 +29,20 @@ body {
     border: 1px black solid;
     height: 100px;
     font-size: xx-large;
+}
+
+.absolute {
+    position: absolute;
+    top: 123px;
+    left: 30%;
+    width: 800px;
+    height: 500px;
+    background-color: rgb(80, 80, 80);
+}
+
+.hidden {
+    visibility: hidden;
+}
+.visible {
+    visibility: visible;
 }
