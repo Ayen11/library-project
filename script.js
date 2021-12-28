@@ -59,7 +59,7 @@ function book(title, author, pages, read) {
 
 //test of constructor
 const Hobbit = new book('The Hobbit', 'J.R.R. Tolkien', 295, false);
-const Hobbit2 = new book('The Hobbit2- Tokyo Drift', `J.R.R. Tolkien-2 (He's a robot now!)`, 269, "Read");
+const Hobbit2 = new book('Example - The Hobbit2 - Tokyo Drift', `J.R.R. Tolkien2.0 (He's a robot now!)`, 269, "Read");
 
 
 //simple function to push book object into array. call this before display
@@ -87,11 +87,27 @@ function displayBooks () {
         containerRef.appendChild(card);
         //console.log(card.classList);
 
+        //const readCheckbox = document.createElement('input');
+        //readCheckbox.type = 'checkbox';
+        //readCheckbox.name = "readCard";
+        //readCheckbox.id = 'readcheckbox';
+        //readCheckbox.value = myLibrary.read.value;
+        //card.appendChild(readCheckbox);
+        //readCheckbox.addEventListener('click', () => {
+        //    myLibrary[i].read = readCheckbox.value;
+        //    alert(myLibrary[i].read);
+            //displayBooks();
+       // });
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = "delete"
-        deleteBtn.classList.add('delete')
-        card.appendChild(deleteBtn)
+        //const readLabel = document.createElement('label');
+        //readLabel.htmlFor = "readcheckbox";
+        //readLabel.textContent = 'read?';
+        //card.appendChild(readLabel);
+
+        const deleteBtn = document.createElement('button'); //add delete button
+        deleteBtn.textContent = "delete";
+        deleteBtn.classList.add('delete');
+        card.appendChild(deleteBtn);
         deleteBtn.addEventListener('click', () => {
             myLibrary.splice(i, 1);
             displayBooks();
@@ -104,5 +120,5 @@ function displayBooks () {
 //run the commands
 
 
-addBookToLibrary(Hobbit);
+addBookToLibrary(Hobbit2);
 displayBooks();
