@@ -93,7 +93,8 @@ function displayBooks () {
         deleteBtn.classList.add('delete')
         card.appendChild(deleteBtn)
         deleteBtn.addEventListener('click', () => {
-            containerRef.removeChild('card');
+            myLibrary.splice(i, 1);
+            displayBooks();
         });
     };
 };
