@@ -19,9 +19,13 @@ body {
     grid-row-end: auto;
 }
 
-#card {
+.card {
     display: flex;
-    text-align: center;
-    background-color: aquamarine;
-    color: blue;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(192, 192, 192);
+    color: rgb(29, 29, 29);
+    border: 1px black solid;
+    height: 100px;
+    font-size: xx-large;
 }

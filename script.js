@@ -5,22 +5,29 @@ function book(title, author, pages, read) {
     this.title = title
     this.author = author
     this.pages = pages
-    this.read = read
+    this.read = (function() {
+        if (read == true) {
+            return read = "Read"
+        }
+        else {
+            return read = "Not read"
+        }
+    })();
     this.info = function() {
         return (title + " by " + author + ", " + pages + " pages, " + read)
     }
 };
 
 
-const Hobbit = new book('The Hobbit', 'J.R.R. Tolkien', 295, "not read yet");
+const Hobbit = new book('The Hobbit', 'J.R.R. Tolkien', 295, false);
 const Hobbit2 = new book('The Hobbit2- Tokyo Drift', `J.R.R. Tolkien-2 (He's a robot now!)`, 269, "Read");
 
 
 function addBookToLibrary(bookI) {
-    myLibrary = myLibrary.push(bookI);
+    myLibrary.push(bookI);
 };
 
-myLibrary = [Hobbit, Hobbit2]
+
 //trying to create a new div for every card 
 function displayBooks () {
     
@@ -46,4 +53,5 @@ function displayBooks () {
 //addBookToLibrary(Hobbit);
 //console.log(Hobbit.info());
 //console.table(myLibrary);
+addBookToLibrary(Hobbit);
 displayBooks();
