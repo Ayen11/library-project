@@ -16,17 +16,20 @@ let notificationBoxRef = document.querySelector("#absolute");
 notificationBoxRef.classList.add('hidden')
 
 
-
+//popup block -------------------
 const addNewBookBtn = document.querySelector('#addBook'); //button to add books to page
 addNewBookBtn.addEventListener('click', () => {
     notificationBoxRef.classList.add('hidden');
     //myLibrary = [];
     bookT = new book(titleT.value, authorT.value, pagesT.value, readT.checked);
     addBookToLibrary(bookT);
+    //alert(bookT.read);
+    //alert(readT.checked);
+    readT.checked
     displayBooks();
     //console.table(bookT);
 });
-
+//--------------------------------------------------
 
 
 
@@ -44,22 +47,28 @@ function book(title, author, pages, read) {
     this.author = author
     this.pages = pages
     this.index = 0
-    this.read = (function() {
-        if (read == true) {
-            return read = "Read"
-        }
-        else {
-            return read = "Not read"
-        }
-    })();
+    this.read = read
     this.info = function() {
-        return (title + " by " + author + ", " + pages + " pages, " + read)
+        return (title + " by " + author + ", " + pages + " pages.")
+        //return (title + " by " + author + ", " + pages + " pages, " + getRead(read))
     }
 };
 
+
+function getRead(readValue) {
+    if (readValue === true) {
+        return "Read"
+    }
+    else {
+        return "Not read"
+    }
+};
+
+
 //test of constructor
-const Hobbit = new book('The Hobbit', 'J.R.R. Tolkien', 295, false);
-const Hobbit2 = new book('Example - The Hobbit2 - Tokyo Drift', `J.R.R. Tolkien2.0 (He's a robot now!)`, 269, "Read");
+
+const Hobbit = new book('The Hobbit', 'J.R.R. Tolkien', 295, true);
+const Hobbit2 = new book('Example - The Hobbit2 - Tokyo Drift', `J.R.R. Tolkien2.0 (He's a robot now!)`, 269, false);
 
 
 //simple function to push book object into array. call this before display
@@ -80,28 +89,53 @@ function displayBooks () {
 
     //containerRef.style.gridTemplateColumns = `repeat(${gridsize}, 1fr)`; --change Columns here 
 
-    for (let i = 0; i < myLibrary.length; i++) {
+    for (let i = 0; i < myLibrary.length; i++) { //create card
+        
+
+        let readText = function() {
+            if (bookRef.read == true) {
+                return "Read"
+            }
+            else if (bookRef.read == false) {
+                return "Not read yet"
+            }
+        };
+
+
+        let bookRef = myLibrary[i];
         const card = document.createElement('div');
         card.classList.add('card');
-        card.textContent = myLibrary[i].info();
+        card.textContent = (myLibrary[i].info() + " " + readText())
         containerRef.appendChild(card);
-        //console.log(card.classList);
+        
 
-        //const readCheckbox = document.createElement('input');
-        //readCheckbox.type = 'checkbox';
-        //readCheckbox.name = "readCard";
-        //readCheckbox.id = 'readcheckbox';
-        //readCheckbox.value = myLibrary.read.value;
-        //card.appendChild(readCheckbox);
-        //readCheckbox.addEventListener('click', () => {
-        //    myLibrary[i].read = readCheckbox.value;
-        //    alert(myLibrary[i].read);
-            //displayBooks();
-       // });
+        const readCheckbox = document.createElement('input'); //on page stuff
+        readCheckbox.type = 'checkbox';
+        readCheckbox.name = "readCard";
+        readCheckbox.id = 'readcheckbox';
+        readCheckbox.checked = bookRef.read;
+        
 
-        //const readLabel = document.createElement('label');
-        //readLabel.htmlFor = "readcheckbox";
-        //readLabel.textContent = 'read?';
+        //console.table(bookRef);
+
+
+
+        card.appendChild(readCheckbox);
+        readCheckbox.addEventListener('click', () => {
+            
+            
+            myLibrary[i].read = readCheckbox.checked;
+            //alert(myLibrary[i].read);
+            //bookRef.read = readCheckbox.checked;
+            //console.table(bookRef);
+            
+            displayBooks();
+            
+        });
+
+        const readLabel = document.createElement('label');
+        readLabel.htmlFor = "readcheckbox";
+        readLabel.textContent = 'read?';
         //card.appendChild(readLabel);
 
         const deleteBtn = document.createElement('button'); //add delete button
